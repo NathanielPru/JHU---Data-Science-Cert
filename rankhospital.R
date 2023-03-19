@@ -1,8 +1,8 @@
- 
 
-best <- function(state, outcome) {
+
+rankhospital <- function(state, outcome, num = "best") {
   ## Read outcome data
-
+  
   setwd("C:/Users/gfdas/OneDrive/Desktop/Data Science/R Projects/JHU---Data-Science-Cert/ProgrammingAssignment3")
   
   outcomedata <- read.csv("outcome-of-care-measures.csv",na.strings = "Not Available"
@@ -31,14 +31,34 @@ best <- function(state, outcome) {
   ## Return hospital name in that state with lowest 30-day death
   ## rate
   
+  if(num=="best"){
+    tempdata <- data.frame(outcomedata[outcomedata$State == state,])
+    
+    tempmin <- min(as.numeric(unlist(tempdata[outcomename])),na.rm=TRUE)
   
-  tempdata <- data.frame(outcomedata[outcomedata$State == state,])
- 
-  tempmin <- min(as.numeric(unlist(tempdata[outcomename])),na.rm=TRUE)
+    i <- which(as.numeric(unlist(tempdata[outcomename])) == tempmin)
   
-  i <- which(as.numeric(unlist(tempdata[outcomename])) == tempmin)
-
-  sort(tempdata$Hospital.Name[i])
-  
+    sort(tempdata$Hospital.Name[i])
+    
+  }else if(num=="worst") {
+    tempdata <- data.frame(outcomedata[outcomedata$State == state,])
+    
+    tempmin <- max(as.numeric(unlist(tempdata[outcomename])),na.rm=TRUE)
+    
+    i <- which(as.numeric(unlist(tempdata[outcomename])) == tempmin)
+    
+    sort(tempdata$Hospital.Name[i])
+    
+  } else if(num>4706) {
+    return(NA)
+    
+  } else{
+    tempdata <- outcomedata[outcomedata$State == state,]
+    
+    
+    templist <- order(tempdata[,outcomename])
+    
+    tempdata$Hospital.Name[templist[num]]
+    
+  }
 }
-
