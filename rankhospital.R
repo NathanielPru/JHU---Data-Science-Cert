@@ -56,9 +56,10 @@ rankhospital <- function(state, outcome, num = "best") {
     tempdata <- outcomedata[outcomedata$State == state,]
     
     
-    templist <- order(tempdata[,outcomename])
+    templist <- order(as.numeric(tempdata[,outcomename]),tempdata[,"Hospital.Name"])
     
     tempdata$Hospital.Name[templist[num]]
     
   }
 }
+
