@@ -34,8 +34,8 @@ cacheSolve <- function(x, ...) {
 }
 
 
-amatrix <- matrix(c(-3,5,1,0),2,2)
-amatrix
+#amatrix <- matrix(c(-3,5,1,0),2,2)
+#amatrix
 
-cacheSolve(makeCacheMatrix(amatrix))
+#cacheSolve(makeCacheMatrix(amatrix))
 
